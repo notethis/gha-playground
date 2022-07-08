@@ -16,6 +16,8 @@ jobs:
       - name: Get Pull Request Number
         run: |
           git log -1 --pretty=%B | cat >> marty-step-one.log
+          cat marty-step-one.log | grep -oe '\((#\d*)\)' >> marty-step-two.log 
           cat marty-step-one.log
+          cat marty-step-two.log
           echo "Testing" 
           echo "End Testing" 
