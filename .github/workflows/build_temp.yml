@@ -15,6 +15,6 @@ jobs:
         uses: actions/setup-node@v2
       - name: Get Pull Request Number
         run: |
-          echo "$(git log -1 --pretty=%B | cat | grep -oe '\(#\d*\)')"
+          echo "$(git log -1 --pretty=%B | cat | grep -oe '\(#[0-9]*\)')"
           echo "Testing" 
           echo "End Testing" 
