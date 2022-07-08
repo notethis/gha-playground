@@ -15,8 +15,7 @@ jobs:
         uses: actions/setup-node@v2
       - name: Get Pull Request Number
         run: |
-          git log -1 --pretty=%B | cat >> marty-step-one.log
-          cat marty-step-one.log | grep -oe '\((#\d*)\)' >> marty-step-two.log 
+          git log -1 --pretty=%B | cat | grep -oe '\((#\d*)\)' >> marty-step-one.log
           cat marty-step-one.log
           cat marty-step-two.log
           echo "Testing" 
