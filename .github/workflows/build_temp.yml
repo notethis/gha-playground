@@ -18,5 +18,5 @@ jobs:
           echo "$(git log -1 --pretty=%B | cat | grep -oe '\(#[0-9]*\)' | sed 's/[#()]//g')"
           PR_NUMBER="$(git log -1 --pretty=%B | cat | grep -oe '\(#[0-9]*\)' | sed 's/[#()]//g')"
           echo "Testing" 
-          cat $PR_NUMBER
+          echo $PR_NUMBER
           echo "End Testing" 
