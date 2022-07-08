@@ -15,8 +15,11 @@ jobs:
         uses: actions/setup-node@v2
       - name: Get Pull Request Number
         run: |
-          echo $(git log -1 --pretty=%B)
-          PR_NUMBER=$(git log -1 --pretty=%B | grep -oe '\((#\d*)\)' | sed 's/[#()]//g')  
+          git log -1 --pretty=%B >> marty-step-one.log
+          cat marty-step-one.log | grep -oe '\((#\d*)\)' >> marty-step-two.log 
+          sed 's/[#()]//g') marty-step-two.log >> marty-step-three.log
+          cat marty-step-one.log
+          cat marty-step-two.log
+          cat marty-step-three.log 
           echo "Testing" 
-          echo $PR_NUMBER 
           echo "End Testing" 
