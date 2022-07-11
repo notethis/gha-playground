@@ -14,9 +14,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
       - name: Get Pull Request Number
+        id: get_pr_number
         run: |
           echo "$(git log -1 --pretty=%B | cat | grep -oe '\(#[0-9]*\)' | sed 's/[#()]//g')"
           PR_NUMBER="$(git log -1 --pretty=%B | cat | grep -oe '\(#[0-9]*\)' | sed 's/[#()]//g')"
           echo "Testing" 
           echo $PR_NUMBER
           echo "End Testing" 
+          echo "::set-output name=MOST_RECENT_PR_NUMBER::$PR_NUMBER"
+      - name: Post Publish Information on Pull Request
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+            #### Huzzah! Releases Successfully Published 🎉:
+            ${{ steps.get_pr_number.outputs.MOST_RECENT_PR_NUMBER }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pr_number: ${{ steps.get_pr_number.outputs.MOST_RECENT_PR_NUMBER }}
